@@ -40,7 +40,7 @@ public class SpringConfig {
         return new MusicPlayer(musicList());
     }
 
-    // A computer bean
+    // A computer bean (not used this time)
     @Bean
     public Computer computer() {
         return new Computer(musicPlayer());
