@@ -1,34 +1,38 @@
 package ru.fedoseev.spring;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@Component
 public class MusicPlayer {
-    private Music music1;
-    private Music music2;
 
-    @Autowired
-    public MusicPlayer(@Qualifier("rockMusic") Music music1,
-                       @Qualifier("classicalMusic") Music music2) {
-        this.music1 = music1;
-        this.music2 = music2;
+    private List<Music> musicList;
+
+    // constructor that receives a List of music genres
+    public MusicPlayer(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
-    public String playMusic(Genre genre) {
-        Random rand = new Random();
+    // Getting the name and volume from my resources package (musicPlayer.properties)
+    @Value("${musicPlayer.name}")
+    private String name;
 
-        switch (genre){
-            case ROCK:
-                return "Playing: " + music1.getSong().get(rand.nextInt(music1.getSong().size()));
-            case CLASSICAL:
-                return "Playing: " + music2.getSong().get(rand.nextInt(music2.getSong().size()));
-        }
-        return "Playing: " + music1.getSong() + ", " + music2.getSong();
+    @Value("${musicPlayer.volume}")
+    private int volume;
+
+    // getters
+    public String getName() {
+        return name;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    //Playing a random song from the music list
+    public String playMusic() {
+        Random rand = new Random();
+        return "Playing: " + musicList.get(rand.nextInt(musicList.size())).getSong();
     }
 }
