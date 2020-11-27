@@ -1,18 +1,20 @@
 package ru.fedoseev.spring;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+// My main method here
 public class TestSpring {
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
-                "applicationContext.xml"
+        // the configuration
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+                SpringConfig.class
         );
 
-        Computer computer = context.getBean("computer", Computer.class);
+        // Creating a musicPlayer from a bean
+        MusicPlayer musicPlayer = context.getBean("musicPlayer", MusicPlayer.class);
 
-        System.out.println(computer.playSong(Genre.CLASSICAL));
-        System.out.println(computer.playSong(Genre.ROCK));
-
+        // Testing whether it works (worked! :D)
+        System.out.println(musicPlayer.playMusic());
         context.close();
     }
 }
