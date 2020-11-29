@@ -15,7 +15,8 @@ import java.util.List;
 @Configuration
 @PropertySource("classpath:musicPlayer.properties")
 public class SpringConfig {
-    // Three simple beans of three music genres:
+      
+    // Three simple beans for three music genres:
     @Bean
     public ClassicalMusic classicalMusic() {
         return new ClassicalMusic();
@@ -40,7 +41,7 @@ public class SpringConfig {
         return new MusicPlayer(musicList());
     }
 
-    // A computer bean (not used this time)
+    // A computer bean (not used in this time)
     @Bean
     public Computer computer() {
         return new Computer(musicPlayer());
