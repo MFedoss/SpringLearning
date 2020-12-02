@@ -15,6 +15,7 @@ public class TestSpring {
 
         // Testing whether it works (worked! :D)
         System.out.println(musicPlayer.playMusic());
+        // closing app context before terminating the program
         context.close();
     }
 }
